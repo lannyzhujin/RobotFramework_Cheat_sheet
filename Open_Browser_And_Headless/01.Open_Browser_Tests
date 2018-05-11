@@ -1,0 +1,62 @@
+*** Settings ***
+Test Teardown     Close All Browsers
+Library           Selenium2Library
+Variables         vars.py
+
+*** Variables ***
+${chrome_bin}    C:\\Your\\path\\to\\Chromium\\chrome-win32-68.0.3427.0\\chrome.exe
+
+*** Test Cases ***
+01. General Start Chrome
+    Open Browser    http://www.baidu.com    browser=Chrome
+    Set Window Size    1600    900
+    ${width}    ${height}=    Get Window Size
+    Capture Page Screenshot
+    Go To    http://www.pwc.com
+    Capture Page Screenshot
+
+02. Start Chrome Headless
+    @{args}=    Create List    --headless    window-size=1600,900
+    &{chrome_option}=    Create Dictionary    args=@{args}
+    &{desired_capabilities}=    Create Dictionary    chromeOptions=&{chrome_option}
+    Create Webdriver    Chrome    desired_capabilities=${desired_capabilities}
+    Go To    http://www.baidu.com
+    Capture Page Screenshot
+    Go To    http://www.pwc.com
+    Capture Page Screenshot
+
+03. Start Chromium
+    @{args}=    Create List    window-size=1600,900
+    &{chrome_option}=    Create Dictionary    binary=${chrome_bin}    args=@{args}
+    &{desired_capabilities}=    Create Dictionary    chromeOptions=&{chrome_option}
+    Create Webdriver    Chrome    desired_capabilities=${desired_capabilities}
+    Go To    http://www.baidu.com
+    Capture Page Screenshot
+    Go To    http://www.pwc.com
+    Capture Page Screenshot
+
+04. Start Chromium Headless
+    @{args}=    Create List    --headless    window-size=1600,900
+    &{chrome_option}=    Create Dictionary    binary=${chrome_bin}    args=@{args}
+    &{desired_capabilities}=    Create Dictionary    chromeOptions=&{chrome_option}
+    Create Webdriver    Chrome    desired_capabilities=${desired_capabilities}
+    Go To    http://www.baidu.com
+    Capture Page Screenshot
+    Go To    http://www.pwc.com
+    Capture Page Screenshot
+
+05. Start Chromium Headless By Vars Defined In .py Files.
+    Create Webdriver    Chrome    desired_capabilities=${desired_capabilities_py}
+    Go To    http://www.baidu.com
+    Capture Page Screenshot
+    Go To    http://www.pwc.com
+    Capture Page Screenshot
+
+06. Start Chrome By Python Module Call
+    ${options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
+    Call Method    ${options}    add_argument    --headless
+    Call Method    ${options}    add_argument    window-size="1600,900"
+    Go To    http://www.baidu.com
+    Capture Page Screenshot
+    Go To    http://www.pwc.com
+    Capture Page Screenshot
