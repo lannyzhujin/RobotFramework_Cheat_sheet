@@ -1,5 +1,19 @@
 
 *** Keywords ***
+
+FormatName
+    [Arguments]    ${name}
+    ${name}    Replace String    ${name}    ${SPACE}    _
+    ${name}    Replace String    ${name}    -    _
+    ${name}    Replace String    ${name}    (    _
+    ${name}    Replace String    ${name}    )    _
+    ${name}    Replace String    ${name}    .    _
+    ${name}    Replace String    ${name}    /    _
+    ${name}    Replace String    ${name}    \\    _
+    ${name}    Replace String    ${name}    \#    _
+    ${name}    Replace String    ${name}    :    _
+    [Return]    ${name}
+
 Wait Exists And Click Element
     [Arguments]    ${locator}
     # Wait and frontend loading exception handling
