@@ -12,7 +12,6 @@ Click Element Until Added To Page
     \    Run Keyword And Ignore Error    Click Element    ${locator}
     \    Sleep    1s
     \    ${result}    ${returnvalue}    Run Keyword And Ignore Error    Page Should Contain Element    ${locator_added}
-    # Exit loop if elememt added
     \    Exit For Loop If    '${result}'=='PASS'
 
 Click Element Until Deleted From Page
@@ -23,7 +22,6 @@ Click Element Until Deleted From Page
     \    Run Keyword And Ignore Error    Click Element    ${locator}
     \    Sleep    1s
     \    ${result}    ${returnvalue}    Run Keyword And Ignore Error    Page Should Not Contain Element    ${locator}
-    # Exit loop if element deleted
     \    Exit For Loop If    '${result}'=='PASS'
 
 FormatName
