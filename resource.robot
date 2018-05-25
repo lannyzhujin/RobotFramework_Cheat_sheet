@@ -52,17 +52,17 @@ Open Chrome Headless
     Go To    ${URL}
     
 Open Chromium Browser
-    [Arguments]    ${URL}
-    @{args}=    Create List    window-size=1600,900
+    [Arguments]    ${URL}    ${width}=1600    ${height}=900
+    @{args}=    Create List    window-size=${width},${height}
     &{chrome_option}=    Create Dictionary    binary=${chromium_bin}    args=@{args}
     &{desired_capabilities}=    Create Dictionary    chromeOptions=&{chrome_option}
     Create Webdriver    ${browser}     desired_capabilities=${desired_capabilities}
     Go To    ${URL}
 
 Open Chromium Headless
-    [Arguments]    ${URL}
+    [Arguments]    ${URL}    ${width}=1600    ${height}=900
     # Set args
-    @{args}=    Create List    --no-sandbox    --headless    window-size=1600,900
+    @{args}=    Create List    --no-sandbox    --headless    window-size=${width},${height}
     # Set prefs
     &{downloadBehavior}=    Create Dictionary    behavior=allow    downloadPath=${download_dir}
     &{prefs}=    Create Dictionary    credentials_enable_service=false    Browser.setDownloadBehavior=&{downloadBehavior}    download.default_directory=${download_dir}    download.directory_upgrade=True
