@@ -39,7 +39,7 @@ FormatName
     
 Open Chrome Browser
     [Arguments]    ${URL}    ${width}=1600    ${height}=900
-    Open Browser    http://www.baidu.com    browser=Chrome
+    Open Browser    ${URL}    browser=${browser} 
     Set Window Size    ${width}    ${height}
     Go To    ${URL}
 
@@ -48,7 +48,7 @@ Open Chrome Headless
     @{args}=    Create List    --headless    window-size=${width},${height}
     &{chrome_option}=    Create Dictionary    args=@{args}
     &{desired_capabilities}=    Create Dictionary    chromeOptions=&{chrome_option}
-    Create Webdriver    Chrome    desired_capabilities=${desired_capabilities}
+    Create Webdriver    ${browser}     desired_capabilities=${desired_capabilities}
     Go To    ${URL}
     
 Open Chromium Browser
@@ -56,7 +56,7 @@ Open Chromium Browser
     @{args}=    Create List    window-size=1600,900
     &{chrome_option}=    Create Dictionary    binary=${chromium_bin}    args=@{args}
     &{desired_capabilities}=    Create Dictionary    chromeOptions=&{chrome_option}
-    Create Webdriver    Chrome    desired_capabilities=${desired_capabilities}
+    Create Webdriver    ${browser}     desired_capabilities=${desired_capabilities}
     Go To    ${URL}
 
 Open Chromium Headless
@@ -70,7 +70,7 @@ Open Chromium Headless
     &{chrome_option}=    Create Dictionary    binary=${chromium_bin}    args=@{args}    prefs=&{prefs}
     # Set desired capabilities
     &{desired_capabilities}=    Create Dictionary    chromeOptions=&{chrome_option}
-    Create Webdriver    Chrome    desired_capabilities=${desired_capabilities}
+    Create Webdriver    ${browser}     desired_capabilities=${desired_capabilities}
     
 Wait Exists And Click Element
     [Arguments]    ${locator}
