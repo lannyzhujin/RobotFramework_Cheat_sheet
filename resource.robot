@@ -37,6 +37,20 @@ FormatName
     ${name}    Replace String    ${name}    :    _
     [Return]    ${name}
     
+Open Chrome Browser
+    [Arguments]    ${URL}    ${width}=1600    ${height}=900
+    Open Browser    http://www.baidu.com    browser=Chrome
+    Set Window Size    ${width}    ${height}
+    Go To    ${URL}
+
+Open Chrome Headless
+    [Arguments]    ${URL}    ${width}=1600    ${height}=900
+    @{args}=    Create List    --headless    window-size=${width},${height}
+    &{chrome_option}=    Create Dictionary    args=@{args}
+    &{desired_capabilities}=    Create Dictionary    chromeOptions=&{chrome_option}
+    Create Webdriver    Chrome    desired_capabilities=${desired_capabilities}
+    Go To    ${URL}
+    
 Open Chromium Browser
     [Arguments]    ${URL}
     @{args}=    Create List    window-size=1600,900
@@ -45,7 +59,7 @@ Open Chromium Browser
     Create Webdriver    Chrome    desired_capabilities=${desired_capabilities}
     Go To    ${URL}
 
-Open Chromium Headless Browser
+Open Chromium Headless
     [Arguments]    ${URL}
     # Set args
     @{args}=    Create List    --no-sandbox    --headless    window-size=1600,900
