@@ -1,5 +1,5 @@
 *** Variables ***
-${browser}        Chrome    #
+${browser}        Chrome    #Firefox
 ${chromium_bin}    C:\\Users\\path\\to\\Chromium\\bin\\chrome.exe
 ${download_dir}    C:\\Users\\path\\to\\Downloads\\
 
