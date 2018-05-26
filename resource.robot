@@ -24,7 +24,7 @@ Click Element Until Deleted From Page
     \    ${result}    ${returnvalue}    Run Keyword And Ignore Error    Page Should Not Contain Element    ${locator}
     \    Exit For Loop If    '${result}'=='PASS'
 
-FormatName
+Format Name
     [Arguments]    ${name}
     ${name}    Replace String    ${name}    ${SPACE}    _
     ${name}    Replace String    ${name}    -    _
@@ -79,6 +79,7 @@ Scroll To Element
     Execute Javascript    window.scrollBy(${x}, ${y});
 
 Scroll Element Into View
+    # Some elements are listed in tables. If you need scroll table, please use this keyword.
     [Arguments]    ${element_xpath}
     Execute Javascript    var elmnt = document.evaluate("${element_xpath}", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; elmnt.scrollIntoView();
 
