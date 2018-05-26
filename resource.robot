@@ -72,6 +72,16 @@ Open Chromium Headless
     &{desired_capabilities}=    Create Dictionary    chromeOptions=&{chrome_option}
     Create Webdriver    ${browser}     desired_capabilities=${desired_capabilities}
     
+Scroll To Element
+    [Arguments]    ${locator}
+    ${x}=    Get Horizontal Position    ${locator}
+    ${y}=    Get Vertical Position    ${locator}
+    Execute Javascript    window.scrollBy(${x}, ${y});
+
+Scroll Element Into View
+    [Arguments]    ${element_xpath}
+    Execute Javascript    var elmnt = document.evaluate("${element_xpath}", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; elmnt.scrollIntoView();
+
 Wait Exists And Click Element
     [Arguments]    ${locator}
     # Wait and frontend loading exception handling
